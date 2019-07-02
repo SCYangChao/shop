@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysDbConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysDbConfig">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="cycle_tpe" property="cycleTpe" />
+        <result column="cycle" property="cycle" />
+        <result column="del_flag" property="delFlag" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, cycle_tpe AS cycleTpe, cycle, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, create_time AS createTime, create_by AS createBy
+    </sql>
+
+</mapper>

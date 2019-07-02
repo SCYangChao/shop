@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysLog">
+        <id column="id" property="id" />
+        <result column="cost_time" property="costTime" />
+        <result column="log_time" property="logTime" />
+        <result column="ip" property="ip" />
+        <result column="model" property="model" />
+        <result column="title" property="title" />
+        <result column="reques_uri" property="requesUri" />
+        <result column="params" property="params" />
+        <result column="result_status" property="resultStatus" />
+        <result column="exception" property="exception" />
+        <result column="method" property="method" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="del_flag" property="delFlag" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, cost_time, log_time AS logTime, ip, model, title, reques_uri AS requesUri, params, result_status AS resultStatus, exception, method, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
+    </sql>
+
+    <select id="pageList" resultType=".api.model.dto.response.log.ListLogResponse">
+
+        SELECT
+          id, `cost＿time`, log_time AS logTime, ip, model, title, reques_uri AS requestUri, params, result_status AS resultStatus, exception, method, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
+        FROM
+          sys_log
+        <where>
+            <if test="null != dto.userName and '' != dto.userName">
+                AND create_by LIKE  CONCAT(#{dto.userName}"%")
+            </if>
+            <if test="null != dto.resultStatus">
+                AND result_status =#{dto.resultStatus}
+            </if>
+            <if test="null != dto.startTime and null != dto.endTime">
+                AND create_time  <![CDATA[ >= ]]>  #{dto.startTime} AND create_time<![CDATA[ <= ]]> #{dto.endTime}
+            </if>
+        </where>
+        ORDER  BY create_time DESC
+    </select>
+
+</mapper>

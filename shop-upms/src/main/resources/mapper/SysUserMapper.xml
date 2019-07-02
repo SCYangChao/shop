@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysUser">
+        <id column="id" property="id" />
+        <result column="address" property="address" />
+        <result column="avatar" property="avatar" />
+        <result column="description" property="description" />
+        <result column="email" property="email" />
+        <result column="mobile" property="mobile" />
+        <result column="nick_name" property="nickName" />
+        <result column="password" property="password" />
+        <result column="sex" property="sex" />
+        <result column="status" property="status" />
+        <result column="type" property="type" />
+        <result column="username" property="username" />
+        <result column="del_flag" property="delFlag" />
+        <result column="department_id" property="departmentId" />
+        <result column="street" property="street" />
+        <result column="pass_strength" property="passStrength" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, address, avatar, description, email, mobile, nick_name AS nickName, password, sex, status, type, username, del_flag AS delFlag, department_id AS departmentId, street, pass_strength AS passStrength, update_time AS updateTime, create_by AS createBy, create_time AS createTime, update_by AS updateBy
+    </sql>
+    <select id="pageList" resultType=".api.model.dto.response.user.ListUserResponse">
+        SELECT
+        t.id,
+        t.address,
+        t.avatar,
+        t.description,
+        t.email,
+        t.mobile,
+        t.nick_name AS nickName,
+        t.`password`,
+        t.sex,
+        t.`status`,
+        t.type,
+        t.username AS userName,
+        t.del_flag AS delFlag,
+        t.department_id AS departmentId,
+        t.street,
+        t.pass_strength AS passStrength,
+        t.update_time AS updateTime,
+        t.create_by AS createBy,
+        date_format(
+        t.create_time,
+        '%Y-%c-%d %h:%i:%s'
+        ) AS createTime,
+        t.update_by AS updateBy
+        FROM
+        sys_user AS t LEFT JOIN sys_department AS tt ON t.department_id=tt.id
+        <where>
+
+            <if test="null != dto.userName and '' != dto.userName">
+               AND t.`username` LIKE  CONCAT(#{dto.userName}"%")
+            </if>
+            <if test="null != code and '' != code ">
+                AND tt.attach_code LIKE  CONCAT(#{code}"%")
+            </if>
+            <if test="null != dto.status ">
+                AND t.`status` = #{dto.status}
+            </if>
+        </where>
+    </select>
+
+</mapper>

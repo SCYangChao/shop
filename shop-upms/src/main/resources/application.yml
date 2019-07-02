@@ -1,0 +1,33 @@
+server:
+  port: 4004
+
+auth-server: http://127.0.0.1:4003 # 认证服务器地址
+
+security:
+  oauth2:
+    client:
+      client-id: yc
+      client-secret: yc
+      scope: server
+      access-token-uri: ${auth-server}/oauth/token
+      user-authorization-uri: ${auth-server}/oauth/authorize
+    resource:
+      token-info-uri: ${auth-server}/oauth/check_token
+spring:
+  redis:
+    remote: true
+    host: redis
+    port: 6379
+    password: 123456
+  application:
+    name: shop-service-api
+  profiles:
+    active: dev
+urls:
+  anon:
+    - /swagger-resources/**
+    - /swagger-ui.html
+    - /v2/api-docs
+    - /swagger/api-docs
+    - /webjars/**
+    - /api/sys/v1.0/anonymous/**

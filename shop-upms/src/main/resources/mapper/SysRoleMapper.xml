@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysRole">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="default_role" property="defaultRole" />
+        <result column="description" property="description" />
+        <result column="data_type" property="dataType" />
+        <result column="create_by" property="createBy" />
+        <result column="del_flag" property="delFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="status" property="status"></result>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, `name`, default_role AS defaultRole, description, data_type AS dataType, create_by AS createBy, del_flag AS delFlag, create_time AS createTime, update_by AS updateBy, update_time AS updateTime
+    </sql>
+
+    <select id="pageList" resultType=".api.model.dto.response.role.ListRolePageResponse">
+
+        SELECT
+          id, `name`,status, default_role AS defaultRole, description, data_type AS dataType, create_by AS createBy, del_flag AS delFlag, date_format(create_time, '%Y-%c-%d %h:%i:%s' )   AS createTime, update_by AS updateBy, update_time AS updateTime
+        FROM
+        sys_role
+        <where>
+
+            <if test="null != dto.name and '' != dto.name">
+               AND   `name` LIKE  CONCAT(#{dto.name}"%")
+            </if>
+            <if test="null != dto.status">
+               AND status=#{dto.status}
+            </if>
+
+        </where>
+
+    </select>
+</mapper>

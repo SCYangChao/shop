@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysDictMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysDict">
+        <id column="id" property="id" />
+        <result column="description" property="description" />
+        <result column="parent_id" property="parentId" />
+        <result column="sort_order" property="sortOrder" />
+        <result column="status" property="status" />
+        <result column="title" property="title" />
+        <result column="value" property="value" />
+        <result column="del_flag" property="delFlag" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, description, parent_id AS parentId, sort_order AS sortOrder, status, title, value, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, create_time AS createTime, create_by AS createBy
+    </sql>
+
+    <select id="queryDisct" resultType="com.yqkj.dto.KeyValueCommonDto">
+
+        SELECT
+            tt.title AS `value`,
+            tt.`value` AS `key`
+        FROM
+            sys_dict AS t
+        INNER JOIN sys_dict AS tt ON tt.parent_id = t.id
+        WHERE
+            t.`value` = #{parentKey}
+
+    </select>
+</mapper>

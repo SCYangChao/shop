@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysDbBackMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysDbBack">
+        <id column="id" property="id" />
+        <result column="path" property="path" />
+        <result column="file_name" property="fileName" />
+        <result column="start_time" property="startTime" />
+        <result column="ent_time" property="entTime" />
+        <result column="time_up" property="timeUp" />
+        <result column="acc" property="acc" />
+        <result column="user_name" property="userName" />
+        <result column="phone" property="phone" />
+        <result column="status" property="status" />
+        <result column="back_type" property="backType" />
+        <result column="del_flag" property="delFlag" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, path, file_name AS fileName, start_time AS startTime, ent_time AS entTime, time_up AS timeUp, acc, user_name AS userName, phone, status, back_type AS backType, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, create_time AS createTime, create_by AS createBy
+    </sql>
+    <select id="pageList" resultType=".api.model.dto.response.db.ListDbBackResponse">
+          SELECT
+            id,
+            path,
+            file_name AS fileName,
+            date_format(start_time, '%Y-%c-%d %h:%i:%s' )  AS startTime,
+            date_format(ent_time, '%Y-%c-%d %h:%i:%s' )  AS entTime,
+            time_up AS timeUp,
+            acc,
+            user_name AS userName,
+            phone,
+            `status`,
+            back_type AS backType,
+            date_format(create_time, '%Y-%c-%d %h:%i:%s' )  AS createTime
+        FROM
+            sys_db_back
+        ORDER BY
+            create_time
+    </select>
+
+</mapper>

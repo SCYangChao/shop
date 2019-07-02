@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.upms.api.mapper.SysDepartmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shop.upms.api.model.entity.SysDepartment">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="parent_id" property="parentId" />
+        <result column="is_parent" property="isParent" />
+        <result column="status" property="status" />
+        <result column="sort" property="sort" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="del_flag" property="delFlag" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, parent_id AS parentId, is_parent AS isParent, status, sort, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
+    </sql>
+    <select id="queryOrgTree" resultType=".api.model.dto.response.org.OrgTreeResponse">
+        SELECT
+            t.`name`,
+            t.id,
+            t.parent_id AS parentId,
+            tt.`name` AS parentName,
+            t.`code`,
+            t.`status`
+
+        FROM
+            sys_department AS t
+        LEFT JOIN sys_department AS tt ON t.parent_id = tt.id
+        <where>
+            <if test="null != dto.status">
+                AND t.`status`=#{dto.status}
+            </if>
+        </where>
+        ORDER BY t.sort
+
+    </select>
+
+    <select id="queryOrgList" resultType=".api.model.dto.response.org.OrgTreeResponse">
+        SELECT
+        t.`name`,
+        t.id,
+        t.parent_id AS parentId,
+        tt.`name` AS parentName,
+        t.`code`,
+        t.`status`
+
+        FROM
+        sys_department AS t
+        LEFT JOIN sys_department AS tt ON t.parent_id = tt.id
+        <where>
+            <if test="null != dto.status">
+               AND t.`status`=#{dto.status}
+            </if>
+            <if test="null != dto.parentId">
+                AND t.`parent_id`=#{dto.parentId}
+            </if>
+        </where>
+        ORDER BY t.sort
+    </select>
+</mapper>
