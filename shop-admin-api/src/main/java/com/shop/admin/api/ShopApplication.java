@@ -1,4 +1,4 @@
-package com.shop.upms.api;
+package com.shop.admin.api;
 
 
 import org.springframework.boot.SpringApplication;
