@@ -26,7 +26,7 @@
     <sql id="Base_Column_List">
         id, path, file_name AS fileName, start_time AS startTime, ent_time AS entTime, time_up AS timeUp, acc, user_name AS userName, phone, status, back_type AS backType, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime, create_time AS createTime, create_by AS createBy
     </sql>
-    <select id="pageList" resultType=".api.model.dto.response.db.ListDbBackResponse">
+    <select id="pageList" resultType="com.shop.upms.api.model.dto.response.db.ListDbBackResponse">
           SELECT
             id,
             path,

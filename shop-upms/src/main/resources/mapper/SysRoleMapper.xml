@@ -22,7 +22,7 @@
         id, `name`, default_role AS defaultRole, description, data_type AS dataType, create_by AS createBy, del_flag AS delFlag, create_time AS createTime, update_by AS updateBy, update_time AS updateTime
     </sql>
 
-    <select id="pageList" resultType=".api.model.dto.response.role.ListRolePageResponse">
+    <select id="pageList" resultType="com.shop.upms.api.model.dto.response.role.ListRolePageResponse">
 
         SELECT
           id, `name`,status, default_role AS defaultRole, description, data_type AS dataType, create_by AS createBy, del_flag AS delFlag, date_format(create_time, '%Y-%c-%d %h:%i:%s' )   AS createTime, update_by AS updateBy, update_time AS updateTime

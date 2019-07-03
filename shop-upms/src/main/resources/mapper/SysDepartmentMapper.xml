@@ -21,7 +21,7 @@
     <sql id="Base_Column_List">
         id, name, parent_id AS parentId, is_parent AS isParent, status, sort, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
     </sql>
-    <select id="queryOrgTree" resultType=".api.model.dto.response.org.OrgTreeResponse">
+    <select id="queryOrgTree" resultType="com.shop.upms.api.model.dto.response.org.OrgTreeResponse">
         SELECT
             t.`name`,
             t.id,
@@ -42,7 +42,7 @@
 
     </select>
 
-    <select id="queryOrgList" resultType=".api.model.dto.response.org.OrgTreeResponse">
+    <select id="queryOrgList" resultType="com.shop.upms.api.model.dto.response.org.OrgTreeResponse">
         SELECT
         t.`name`,
         t.id,

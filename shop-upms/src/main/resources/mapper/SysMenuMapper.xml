@@ -28,7 +28,7 @@
     <sql id="Base_Column_List">
         id, name, parent_id AS parentId, type, component, path, title, icon, level, sort_order AS sortOrder, status, url, description, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
     </sql>
-    <select id="userMenu" resultType=".api.model.entity.SysMenu">
+    <select id="userMenu" resultType="com.shop.upms.api.model.entity.SysMenu">
         SELECT
             sm.id,
             sm.`name`,

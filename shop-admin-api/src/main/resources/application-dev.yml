@@ -28,7 +28,7 @@ spring:
 ##mybaits-plus配置，
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
-  typeAliasesPackage: .api.model.entity
+  typeAliasesPackage: com.shop.upms.api.model.entity
   global-config:
     id-type: 0
     field-strategy: 1

@@ -30,7 +30,7 @@
     <sql id="Base_Column_List">
         id, address, avatar, description, email, mobile, nick_name AS nickName, password, sex, status, type, username, del_flag AS delFlag, department_id AS departmentId, street, pass_strength AS passStrength, update_time AS updateTime, create_by AS createBy, create_time AS createTime, update_by AS updateBy
     </sql>
-    <select id="pageList" resultType=".api.model.dto.response.user.ListUserResponse">
+    <select id="pageList" resultType="com.shop.upms.api.model.dto.response.user.ListUserResponse">
         SELECT
         t.id,
         t.address,

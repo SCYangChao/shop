@@ -27,7 +27,7 @@
         id, cost_time, log_time AS logTime, ip, model, title, reques_uri AS requesUri, params, result_status AS resultStatus, exception, method, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
     </sql>
 
-    <select id="pageList" resultType=".api.model.dto.response.log.ListLogResponse">
+    <select id="pageList" resultType="com.shop.upms.api.model.dto.response.log.ListLogResponse">
 
         SELECT
           id, `cost＿time`, log_time AS logTime, ip, model, title, reques_uri AS requestUri, params, result_status AS resultStatus, exception, method, create_by AS createBy, create_time AS createTime, del_flag AS delFlag, update_by AS updateBy, update_time AS updateTime
